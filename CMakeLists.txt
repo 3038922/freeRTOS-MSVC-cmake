@@ -16,21 +16,27 @@ include_directories(
 #添加-D
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
 #关闭警告
-add_compile_options(/wd"4574" /wd"4820" /wd"4255" /wd"4710" -Wno-int-to-void-pointer-cast -Wno-format)
+add_compile_options(-Wno-int-to-void-pointer-cast -Wno-format)
 set(MODE 1)# 1正常编译 2生成静态库
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件存放路径 
-#SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/include/ncrapi_lvgl_sim_kernel/lib) #设置各种库存放路径
+#SET(LIB_OUTPUT_PATH "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64") #设置各种库存放路径
 if(MODE EQUAL 1)
     #枚举头文件
     #file(GLOB_RECURSE INCLUDES "include/*.h" "include/*.hpp")
     #枚举源文件
     file(GLOB_RECURSE SOURCES  "src/*.c" "src/*.cpp")
     #添加需要链接的库文件目录 新建好了 链接的时候用
-    #LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
+    LINK_DIRECTORIES(
+    "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64" 
+    "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/lib/x64"
+    "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/atlmfc/lib/x64"
+    "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/VS/lib/x64"
+    "C:/Program Files (x86)/Windows Kits/10/lib/10.0.18362.0/ucrt/x64"
+    "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/VS/UnitTest/lib"
+    "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.7.2/lib/um/x64")
     #生成可执行文件
     add_executable(main ${SOURCES})
-
-   # target_link_libraries(main )#不链接pthread easylog编译报错
+    target_link_libraries(main )#不链接pthread easylog编译报错
     #添加一个run命令
     add_custom_target (run COMMAND ninja all  COMMAND ${EXECUTABLE_OUTPUT_PATH}/main)
 else() 
