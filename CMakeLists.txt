@@ -17,6 +17,8 @@ include_directories(
     "FreeRTOS/Demo/WIN32-MSVC/Trace_Recorder_Configuration"
     "FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace/Include"
 )
+#添加-D
+add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
 set(MODE 1)# 1正常编译 2生成静态库
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件存放路径 
 #SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/include/ncrapi_lvgl_sim_kernel/lib) #设置各种库存放路径
@@ -30,8 +32,7 @@ if(MODE EQUAL 1)
     #LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
     #生成可执行文件
     add_executable(main ${SOURCES})
-    #添加-D
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
+
    # target_link_libraries(main )#不链接pthread easylog编译报错
     #添加一个run命令
     add_custom_target (run COMMAND ninja all  COMMAND ${EXECUTABLE_OUTPUT_PATH}/main)
