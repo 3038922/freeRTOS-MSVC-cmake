@@ -72,7 +72,7 @@ The blinky demo is implemented and described in main_blinky.c.
 If mainCREATE_SIMPLE_BLINKY_DEMO_ONLY is not 1 then the comprehensive test and
 demo application will be built.  The comprehensive test and demo application is
 implemented and described in main_full.c. */
-#define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY 0
+#define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY 1
 
 /* This demo uses heap_5.c, and these constants define the sizes of the regions
 that make up the total heap.  heap_5 is only used for test and example purposes
@@ -137,36 +137,49 @@ StackType_t uxTimerTaskStack[configTIMER_TASK_STACK_DEPTH];
 static BaseType_t xTraceRunning = pdTRUE;
 
 /*-----------------------------------------------------------*/
-
+void task1(void *para)
+{
+    int flag = 0;
+    while (1)
+    {
+        flag++;
+        printf("hello freeRTOS:%d\n", flag);
+        vTaskDelay(500);
+    }
+    vTaskDelete(NULL);
+}
 int main(void)
 {
+
     /* This demo uses heap_5.c, so start by defining some heap regions.  heap_5
 	is only used for test and example reasons.  Heap_4 is more appropriate.  See
 	http://www.freertos.org/a00111.html for an explanation. */
     prvInitialiseHeap();
-
     /* Initialise the trace recorder.  Use of the trace recorder is optional.
-	See http://www.FreeRTOS.org/trace for more information. */
+    See http://www.FreeRTOS.org/trace for more information. */
     vTraceEnable(TRC_START);
+    xTaskCreate(task1, "task1", 512, NULL, 1, NULL);
+    vTaskStartScheduler();
 
-/* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
+    /* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
 	of this file. */
-#if (mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 1)
-    {
-        main_blinky();
-    }
-#else
-    {
-        /* Start the trace recording - the recording is written to a file if
-		configASSERT() is called. */
-        printf("\r\nTrace started.\r\nThe trace will be dumped to disk if a call to configASSERT() fails.\r\n");
-        printf("Uncomment the call to kbhit() in this file to also dump trace with a key press.\r\n");
-        uiTraceStart();
+    // #if (mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 1)
+    //     {
+    //         main_blinky();
+    //     }
+    // #else
+    //     {
+    //         /* Start the trace recording - the recording is written to a file if
+    // 		configASSERT() is called. */
+    //         printf("\r\nTrace started.\r\nThe trace will be dumped to disk if a call to configASSERT() fails.\r\n");
+    //         printf("Uncomment the call to kbhit() in this file to also dump trace with a key press.\r\n");
+    //         uiTraceStart();
 
-        main_full();
-    }
-#endif
-
+    //         main_full();
+    //     }
+    // #endif
+    while (1)
+        ;
     return 0;
 }
 /*-----------------------------------------------------------*/
