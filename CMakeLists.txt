@@ -6,7 +6,6 @@ project(ncrapi_lvgl_sim_kernel)
 set(CMAKE_C_STANDARD 11)#C11
 set(CMAKE_CXX_STANDARD 17)#C17
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable -Wno-unused-function -Wunused-private-field")
 #头文件路径
 include_directories(
     ${TOOLCHAIN_INC_DIR} 
@@ -19,6 +18,11 @@ include_directories(
 )
 #添加-D
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
+#关闭警告
+add_compile_options(/wd4574)
+add_compile_options(/wd4820)
+add_compile_options(/wd4255)
+add_compile_options(/wd4710)
 set(MODE 1)# 1正常编译 2生成静态库
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件存放路径 
 #SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/include/ncrapi_lvgl_sim_kernel/lib) #设置各种库存放路径
