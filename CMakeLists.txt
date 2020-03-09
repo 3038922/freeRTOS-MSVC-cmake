@@ -11,11 +11,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable -Wno-unused-functio
 include_directories(
     ${TOOLCHAIN_INC_DIR} 
     "FreeRTOS/Source/include"
-    "FreeRTOS/Demo/Common/include"
-    "FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace/Include"
     "FreeRTOS/Source/portable/MSVC-MingW"
-    "FreeRTOS/Demo/WIN32-MSVC/Trace_Recorder_Configuration"
+    "FreeRTOS/Demo/Common/include"
     "FreeRTOS/Demo/WIN32-MSVC"
+    "FreeRTOS/Demo/WIN32-MSVC/Trace_Recorder_Configuration"
+    "FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace/Include"
 )
 set(MODE 1)# 1正常编译 2生成静态库
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件存放路径 
