@@ -12,8 +12,6 @@ include_directories(
     "include"
     "include/freeRTOS"
     "include/demo"
-    "include/demo/Trace_Recorder_Configuration"
-    "include/freeRTOS-Plus"
 )
 #添加-D
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
