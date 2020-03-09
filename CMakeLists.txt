@@ -24,7 +24,9 @@ if(MODE EQUAL 1)
     #枚举头文件
     #file(GLOB_RECURSE INCLUDES "FreeRTOS/*.h" "FreeRTOS-Plus/*.hpp")
     #枚举源文件
-    file(GLOB_RECURSE SOURCES "FreeRTOS/Demo/WIN32-MSVC/*.c" "FreeRTOS/Demo/WIN32-MSVC/*.cpp")
+    # file(GLOB_RECURSE SOURCES "FreeRTOS/Demo/WIN32-MSVC/*.c" "FreeRTOS/Demo/WIN32-MSVC/*.cpp")
+    file(GLOB_RECURSE SOURCES "FreeRTOS/*.c" "FreeRTOS/*.cpp"  "FreeRTOS-Plus/*.c" "FreeRTOS-Plus/*.cpp")
+    
     #添加需要链接的库文件目录 新建好了 链接的时候用
     #LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
     #生成可执行文件
