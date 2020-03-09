@@ -18,18 +18,14 @@ include_directories(
 #添加-D
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
 #关闭警告
-add_compile_options(/wd4574)
-add_compile_options(/wd4820)
-add_compile_options(/wd4255)
-add_compile_options(/wd4710)
+add_compile_options(/wd"4574" /wd"4820" /wd"4255" /wd"4710" -Wno-int-to-void-pointer-cast)
 set(MODE 1)# 1正常编译 2生成静态库
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件存放路径 
 #SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/include/ncrapi_lvgl_sim_kernel/lib) #设置各种库存放路径
 if(MODE EQUAL 1)
     #枚举头文件
-    file(GLOB_RECURSE INCLUDES "include/*.h" "include/*.hpp")
+    #file(GLOB_RECURSE INCLUDES "include/*.h" "include/*.hpp")
     #枚举源文件
-    # file(GLOB_RECURSE SOURCES "FreeRTOS/Demo/WIN32-MSVC/*.c" "FreeRTOS/Demo/WIN32-MSVC/*.cpp")
     file(GLOB_RECURSE SOURCES  "src/*.c" "src/*.cpp")
     #添加需要链接的库文件目录 新建好了 链接的时候用
     #LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})

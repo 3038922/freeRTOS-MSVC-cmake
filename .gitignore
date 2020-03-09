@@ -21,3 +21,4 @@ build/
 !/build/SDL2.dll
 .vs/
 Debug/
+*.dump
