@@ -8,13 +8,12 @@ set(CMAKE_CXX_STANDARD 17)#C17
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #头文件路径
 include_directories(
-    ${TOOLCHAIN_INC_DIR} 
-    "FreeRTOS/Source/include"
-    "FreeRTOS/Source/portable/MSVC-MingW"
-    "FreeRTOS/Demo/Common/include"
-    "FreeRTOS/Demo/WIN32-MSVC"
-    "FreeRTOS/Demo/WIN32-MSVC/Trace_Recorder_Configuration"
-    "FreeRTOS-Plus/Source/FreeRTOS-Plus-Trace/Include"
+    ${TOOLCHAIN_INC_DIR}
+    "include"
+    "include/freeRTOS"
+    "include/demo"
+    "include/demo/Trace_Recorder_Configuration"
+    "include/freeRTOS-Plus"
 )
 #添加-D
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
@@ -28,10 +27,10 @@ SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件�
 #SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/include/ncrapi_lvgl_sim_kernel/lib) #设置各种库存放路径
 if(MODE EQUAL 1)
     #枚举头文件
-    file(GLOB_RECURSE INCLUDES "FreeRTOS/*.h" "FreeRTOS/*.h"  "FreeRTOS-Plus/*.h" "FreeRTOS-Plus/*.h")
+    file(GLOB_RECURSE INCLUDES "include/*.h" "include/*.hpp")
     #枚举源文件
     # file(GLOB_RECURSE SOURCES "FreeRTOS/Demo/WIN32-MSVC/*.c" "FreeRTOS/Demo/WIN32-MSVC/*.cpp")
-    file(GLOB_RECURSE SOURCES "FreeRTOS/*.c" "FreeRTOS/*.cpp"  "FreeRTOS-Plus/*.c" "FreeRTOS-Plus/*.cpp")
+    file(GLOB_RECURSE SOURCES  "src/*.c" "src/*.cpp")
     #添加需要链接的库文件目录 新建好了 链接的时候用
     #LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
     #生成可执行文件
