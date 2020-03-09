@@ -22,31 +22,17 @@ SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build) #设置二进制文件�
 #SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/include/ncrapi_lvgl_sim_kernel/lib) #设置各种库存放路径
 if(MODE EQUAL 1)
     #枚举头文件
-    #file(GLOB_RECURSE INCLUDES "FreeRTOS/*.h" "FreeRTOS-Plus/*.hpp")
+    file(GLOB_RECURSE INCLUDES "FreeRTOS/*.h" "FreeRTOS/*.h"  "FreeRTOS-Plus/*.h" "FreeRTOS-Plus/*.h")
     #枚举源文件
     # file(GLOB_RECURSE SOURCES "FreeRTOS/Demo/WIN32-MSVC/*.c" "FreeRTOS/Demo/WIN32-MSVC/*.cpp")
     file(GLOB_RECURSE SOURCES "FreeRTOS/*.c" "FreeRTOS/*.cpp"  "FreeRTOS-Plus/*.c" "FreeRTOS-Plus/*.cpp")
-    
     #添加需要链接的库文件目录 新建好了 链接的时候用
     #LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
     #生成可执行文件
     add_executable(main ${SOURCES})
-    #链接SDL2的静态库
-    if(CMAKE_HOST_SYSTEM_NAME STREQUAL Linux)
-        message(STATUS "linux")
-        #寻找sdl2
-        find_package(SDL2 REQUIRED SDL2)
-        include_directories(${SDL2_INCLUDE_DIRS})
-        target_link_libraries(main PRIVATE SDL2 lvgl_gcc drivers_gcc pthread)#不链接pthread easylog编译报错
-    elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL Windows)
-        message(STATUS "windows")
-        #添加-D
-        add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 
-                        -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
-        target_link_libraries(main )#不链接pthread easylog编译报错
-    else()
-        message(STATUS "无法判断属于哪种系统!")
-    endif()
+    #添加-D
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
+   # target_link_libraries(main )#不链接pthread easylog编译报错
     #添加一个run命令
     add_custom_target (run COMMAND ninja all  COMMAND ${EXECUTABLE_OUTPUT_PATH}/main)
 else() 
