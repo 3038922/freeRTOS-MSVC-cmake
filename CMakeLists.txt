@@ -1,7 +1,7 @@
 #设置最低的编译版本
 cmake_minimum_required(VERSION 3.10)
 #项目名称
-project(ncrapi_lvgl_sim_kernel)
+project(freeRTOS)
 #设置c/c++标准
 set(CMAKE_C_STANDARD 11)#C11
 set(CMAKE_CXX_STANDARD 17)#C17
@@ -9,9 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #头文件路径
 include_directories(
     ${TOOLCHAIN_INC_DIR}
-    "include"
-    "include/freeRTOS"
-    "include/demo"
+    "src/freeRTOS"
+    "src/freeRTOS-Plus"
+    "src/demo"
 )
 #添加-D
 add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
