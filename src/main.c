@@ -59,8 +59,8 @@ should an assert get hit. */
 #include <intrin.h>
 
 /* FreeRTOS kernel includes. */
-#include "FreeRTOS.h"
-#include "task.h"
+#include "./freeRTOS/FreeRTOS.h"
+#include "./freeRTOS/task.h"
 
 /* This project provides two demo applications.  A simple blinky style demo
 application, and a more comprehensive test and demo application.  The
