@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef FREERTOS_MAIN_H
+#define FREERTOS_MAIN_H
 /* Standard includes. */
 #include <conio.h>
 #include <stdio.h>
@@ -7,9 +7,13 @@
 
 #include <intrin.h>
 
-/* FreeRTOS kernel includes. */
+/* Kernel includes. */
 #include "./freeRTOS/FreeRTOS.h"
+#include "./freeRTOS/queue.h"
+#include "./freeRTOS/semphr.h"
 #include "./freeRTOS/task.h"
+#include "./freeRTOS/timers.h"
+
 #define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY 1
 
 #define mainREGION_1_SIZE 8201
