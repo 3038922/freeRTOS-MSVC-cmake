@@ -1,6 +1,11 @@
+extern "C" {
 #include "main.h"
+}
+
 TaskHandle_t xHandle1 = NULL;
 TaskHandle_t xHandle2 = NULL;
+void *a = xHandle1;
+void *b = xHandle2;
 /*-----------------------------------------------------------*/
 void test(const char *str)
 {
@@ -28,19 +33,20 @@ void task3(void *para)
     {
         if (xTaskGetTickCount() >= 5000)
         {
-            vTaskDelete(xHandle1);
-            xTaskCreate(task2, "task2", 512, NULL, 1, &xHandle2);
+            vTaskDelete((TaskHandle_t)a);
+            xTaskCreate(task2, "task2", 512, NULL, 1, (TaskHandle_t *)b);
             break;
         }
     }
     vTaskDelete(NULL);
 }
+
 int main(void)
 {
     prvInitialiseHeap();
     vTraceEnable(TRC_START);
 
-    xTaskCreate(task1, "task1", 512, NULL, 1, &xHandle1);
+    xTaskCreate(task1, "task1", 512, NULL, 1, (TaskHandle_t *)(&a));
     xTaskCreate(task3, "task3", 512, NULL, 1, NULL);
     vTaskStartScheduler();
     while (1)

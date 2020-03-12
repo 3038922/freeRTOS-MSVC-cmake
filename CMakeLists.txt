@@ -34,7 +34,7 @@ if(AS_A_SUBPROJECT)
 else() 
     message(STATUS "freeRTOS 作为独立项目编译")
     #枚举源文件
-    file(GLOB_RECURSE SOURCES  "src/*.c")
+    file(GLOB_RECURSE SOURCES  "src/*.c" "src/*.cpp")
     #生成可执行文件
     add_executable(main ${SOURCES})
     #添加一个run命令
