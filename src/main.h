@@ -26,7 +26,7 @@
  * main_full() is used when mainCREATE_SIMPLE_BLINKY_DEMO_ONLY is set to 0.
  */
 extern void main_blinky(void);
-static void prvInitialiseHeap()
+__attribute__((unused)) static void prvInitialiseHeap()
 {
     /* The Windows demo could create one large heap region, in which case it would
 be appropriate to use heap_4.  However, purely for demonstration purposes,
