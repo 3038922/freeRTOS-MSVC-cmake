@@ -11,7 +11,8 @@ include_directories(
     ${TOOLCHAIN_INC_DIR}
     "./src/Configuration Files/"
     "./src/External dependence/"
-    "./src/FreeRTOS/include"
+    "./src/FreeRTOS/include/"
+    "./src/userInit/"
 )
 
 #添加-D
@@ -36,7 +37,7 @@ LINK_DIRECTORIES(
 if(AS_A_SUBPROJECT)
     message(STATUS "freeRTOS 作为子项目编译")
     #枚举源文件
-    file(GLOB_RECURSE SOURCES "src/FreeRTOS/src/*.c")
+    file(GLOB_RECURSE SOURCES  "src/freeRTOS/src/*.c" "src/userInit/*.c")
     # 指定生成 ncrapi_lvgl_sim_kernel 链接库
     add_library (freeRTOS ${SOURCES})
 else() 
