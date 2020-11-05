@@ -9,9 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #头文件路径
 include_directories(
     ${TOOLCHAIN_INC_DIR}
-    "src/Configuration Files/"
-    "src/External dependence/"
-    "src/FreeRTOS/include"
+    "./src/Configuration Files/"
+    "./src/External dependence/"
+    "./src/FreeRTOS/include"
 )
 
 #添加-D
