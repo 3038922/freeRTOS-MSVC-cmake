@@ -12,18 +12,15 @@ include_directories(
     "./src/Configuration Files/"
     "./src/External dependence/"
     "./src/FreeRTOS/include/"
-    "./src/userInit/"
 )
 
 #添加-D
-add_definitions(-D_CRT_SECURE_NO_WARNINGS 
-                -D_DEBUG -D_CONSOLE 
-                -D_WIN32_WINNT=0x0601 
-                -DWINVER=0x400 
-                -D_VC80_UPGRADE=0x0600 
-                -D_MBCS)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 #关闭警告
-add_compile_options(-Wno-int-to-void-pointer-cast -Wno-format)
+add_compile_options("-Wno-int-to-void-pointer-cast"
+                    "-Wno-void-pointer-to-int-cast"
+                    "-Wno-format"
+                    )
 
 #添加需要链接的库文件目录 新建好了 链接的时候用
 LINK_DIRECTORIES(
@@ -34,21 +31,22 @@ LINK_DIRECTORIES(
 "C:/Program Files (x86)/Windows Kits/10/lib/10.0.18362.0/ucrt/x64"
 "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/VS/UnitTest/lib"
 "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.7.2/lib/um/x64")
-if(AS_A_SUBPROJECT)
+#if(AS_A_SUBPROJECT)
     message(STATUS "freeRTOS 作为子项目编译")
+    include_directories("./src/userInit/")
     #枚举源文件
     file(GLOB_RECURSE SOURCES  "src/freeRTOS/src/*.c" "src/userInit/*.c")
     # 指定生成 ncrapi_lvgl_sim_kernel 链接库
     add_library (freeRTOS ${SOURCES})
-else() 
-    message(STATUS "freeRTOS 作为独立项目编译")
-    #枚举源文件
-    file(GLOB_RECURSE SOURCES  "src/*.c" "src/*.cpp")
-    #生成可执行文件
-    add_executable(main ${SOURCES})
-    #添加一个run命令
-    add_custom_target (run COMMAND ninja all  COMMAND ${EXECUTABLE_OUTPUT_PATH}/main)
-endif()
+# else() 
+#     message(STATUS "freeRTOS 作为独立项目编译")
+#     #枚举源文件
+#     file(GLOB_RECURSE SOURCES  "src/freeRTOS/src/*.c" "./src/Demo App Source/*.c" "./src/Demo App Source/*.cpp")
+#     #生成可执行文件
+#     add_executable(main ${SOURCES})
+#     #添加一个run命令
+#     add_custom_target (run COMMAND ninja all  COMMAND ${EXECUTABLE_OUTPUT_PATH}/main)
+# endif()
 
 
 

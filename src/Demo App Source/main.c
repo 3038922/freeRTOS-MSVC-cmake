@@ -147,7 +147,6 @@ int main(void)
     /* Initialise the trace recorder.  Use of the trace recorder is optional.
 	See http://www.FreeRTOS.org/trace for more information. */
     vTraceEnable(TRC_START);
-
 /* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
 	of this file. */
 #if (mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 1)
