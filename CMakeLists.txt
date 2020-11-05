@@ -9,10 +9,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #头文件路径
 include_directories(
     ${TOOLCHAIN_INC_DIR}
-    "src/"
+    "src/Configuration Files/"
+    "src/External dependence/"
+    "src/FreeRTOS/include"
 )
+
 #添加-D
-add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_DEBUG -D_CONSOLE -D_WIN32_WINNT=0x0601 -DWINVER=0x400 -D_VC80_UPGRADE=0x0600 -D_MBCS)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS 
+                -D_DEBUG -D_CONSOLE 
+                -D_WIN32_WINNT=0x0601 
+                -DWINVER=0x400 
+                -D_VC80_UPGRADE=0x0600 
+                -D_MBCS)
 #关闭警告
 add_compile_options(-Wno-int-to-void-pointer-cast -Wno-format)
 
@@ -28,7 +36,7 @@ LINK_DIRECTORIES(
 if(AS_A_SUBPROJECT)
     message(STATUS "freeRTOS 作为子项目编译")
     #枚举源文件
-    file(GLOB_RECURSE SOURCES  "src/demo/*.c" "src/freeRTOS/*.c")
+    file(GLOB_RECURSE SOURCES "src/FreeRTOS/src/*.c")
     # 指定生成 ncrapi_lvgl_sim_kernel 链接库
     add_library (freeRTOS ${SOURCES})
 else() 
